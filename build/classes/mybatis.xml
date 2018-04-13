@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!-- 这里的value值可以是SLF4J、Apache Commons Logging、Log4J2、Log4J、JDK logging（除Log4J2、Log4J外，其他未验证），并会按顺序查找 -->
+    </settings>
+</configuration>

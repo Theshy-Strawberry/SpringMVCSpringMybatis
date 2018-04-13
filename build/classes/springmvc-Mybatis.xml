@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+    xmlns:jee="http://www.springframework.org/schema/jee" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+<bean id="DataSource" 
+class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="username" value="root">
+    </property>
+    <property name="password" value="root">
+    </property>
+    <property name="driverClassName" 
+        value="com.mysql.jdbc.Driver">
+    </property>
+    <property name="url" 
+        value="jdbc:mysql://localhost:3306/0329?useUnicode=true&amp;characterEncoding=utf-8">
+    </property>
+
+    <!-- <property name="url" value="jdbc:mysql://localhost:3306/cloud_note?useUnicode=true&amp;characterEncoding=utf-8"></property> -->
+</bean>
+
+<bean id="sqlSessionFactory" 
+class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="DataSource"></property>
+    <!-- 映射的xml的位置  -->
+    <property name="mapperLocations" value="classpath:mapper/*.xml">
+    </property>
+    <!-- 指定Mybatis配置文件地址 -->
+     <property name="configLocation" value="classpath:mybatis.xml"/> 
+</bean>
+<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+<bean id="mapperscanner" 
+class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="sqlSessionFactory" ref="sqlSessionFactory">
+    </property>
+    <!-- 接口位置 -->
+    <property name="basePackage"  value="mapper">
+    </property>
+</bean>
+
+</beans>
